@@ -16,5 +16,6 @@ build/
 # Local generated outputs
 /tmp/
 *.jsonl.tmp
+data/ingested/
 
 /.crew/
