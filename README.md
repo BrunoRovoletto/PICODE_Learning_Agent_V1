@@ -15,6 +15,7 @@ Current bricks:
 - `parser`: self-contained Physics book parser with formula-centered chunking.
 - `kg`: self-contained knowledge graph construction brick.
 - `learner`: Jali-style learner overlay, BKT mastery tracing, ZPD, paths, and reviews.
+- `agent_io`: Pi-facing tool/context layer for KG lookup, retrieval, ZPD/path wrappers, learner updates, memory, attempts, exercises, and teaching-context packets.
 
 ## Parser brick
 
@@ -91,6 +92,74 @@ See:
 
 - `docs/KG_BRICK_DECISION.md`
 - `src/ai_learning_agent/kg/`
+
+## Agent I/O brick
+
+Goal: give Pi stable, compact tool calls while keeping Pi as the flexible tutor-agent.
+
+Architecture invariant:
+
+```text
+one canonical teacher KG
++ one LearnerProfile overlay keyed by KnowledgeNode.id
+= dynamic learner mirror view, not a second persisted KG
+```
+
+Implemented commands:
+
+```text
+node
+relatives
+first-principles
+retrieve
+zpd
+path
+exercise-search
+exercise-get
+record-attempt
+attempts
+update-learner
+memory-get
+memory-update
+pack-context
+```
+
+Examples:
+
+```bash
+PYTHONPATH=src python -m ai_learning_agent.agent_io.cli node \
+  --graph /tmp/kg.json \
+  "Seconda legge di Newton"
+
+PYTHONPATH=src python -m ai_learning_agent.agent_io.cli retrieve \
+  --graph /tmp/kg.json \
+  --profile examples/learner_profile.json \
+  "piano inclinato con attrito"
+
+PYTHONPATH=src python -m ai_learning_agent.agent_io.cli zpd \
+  --graph /tmp/kg.json \
+  --profile examples/learner_profile.json
+
+PYTHONPATH=src python -m ai_learning_agent.agent_io.cli pack-context \
+  --graph /tmp/kg.json \
+  --profile examples/learner_profile.json \
+  --memory /tmp/learner_memory.json \
+  --query "forza risultante" \
+  --mode guided_exercise
+```
+
+Node metadata is standardized through `KnowledgeNode.properties` rather than by duplicating KG schemas. Useful optional/default fields:
+
+```text
+extended_description, difficulty, mastery_threshold, estimated_minutes,
+exam_relevance, topic, is_threshold_concept, common_traps,
+exercise_ladder_level
+```
+
+See:
+
+- `src/ai_learning_agent/agent_io/`
+- `tests/test_agent_io_brick.py`
 
 ## CLI examples
 

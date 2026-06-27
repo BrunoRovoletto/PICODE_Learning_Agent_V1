@@ -27,6 +27,13 @@ from test_learner_brick import (  # noqa: E402
     test_profile_json_roundtrip,
     test_zpd_blocks_nodes_until_prerequisites_mastered,
 )
+from test_agent_io_brick import (  # noqa: E402
+    test_agent_io_exercises_and_pack_context,
+    test_agent_io_memory_and_attempt_log_roundtrip,
+    test_agent_io_node_lookup_relatives_and_first_principles,
+    test_agent_io_zpd_path_and_update_learner,
+    test_context_retrieve_expands_formula_sources_and_user_state,
+)
 
 TESTS = [
     test_chunker_creates_stable_chunks,
@@ -42,6 +49,11 @@ TESTS = [
     test_path_generator_skips_mastered_prerequisites,
     test_mirror_view_is_overlay_not_duplicate_graph,
     test_profile_json_roundtrip,
+    test_agent_io_node_lookup_relatives_and_first_principles,
+    test_context_retrieve_expands_formula_sources_and_user_state,
+    test_agent_io_zpd_path_and_update_learner,
+    test_agent_io_memory_and_attempt_log_roundtrip,
+    test_agent_io_exercises_and_pack_context,
 ]
 
 
