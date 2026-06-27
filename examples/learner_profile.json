@@ -1,0 +1,11 @@
+{
+  "schema": "ai_learning_agent.learner.v1",
+  "learner_id": "default",
+  "node_states": {},
+  "overall_ability": 0.0,
+  "created_at": "2026-06-27T00:00:00+00:00",
+  "updated_at": "2026-06-27T00:00:00+00:00",
+  "metadata": {
+    "note": "Empty demo learner overlay. Real node states are keyed by KG node id."
+  }
+}
